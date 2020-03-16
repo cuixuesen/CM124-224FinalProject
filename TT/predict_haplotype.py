@@ -80,7 +80,7 @@ def start_EM(genotypes):
 		EM_factor, changes = 0.0001, 10
 		time = 0
 		#while changes > EM_factor:
-		while time != 3:
+		while time != 11:
 				time += 1
 				haplotype_box = E_step(haplotype_box, pro_box)
 				pro_box = M_step(haplotype_box, pro_box)
@@ -125,7 +125,7 @@ def main():
 						genotypes[i][j] = max(candidate, key = lambda x : bagging[i][x])
 
 # -----------------------------------------EM Prediction-----------------------------------------------------
-		window_size = 10
+		window_size = 16
 		cc = len(genotypes) // window_size
 		c = 0
 		index = 0
