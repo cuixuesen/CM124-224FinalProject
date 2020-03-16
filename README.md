@@ -6,4 +6,3 @@
 ## It has to have 3 arguments
 ## For  example
 ## python predict_haplotype.py test_data_masked.txt test_data_sol.txt
-## HELLO
