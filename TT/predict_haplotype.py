@@ -52,7 +52,7 @@ def M_step(curr_haplotype, prob):
 		return prob
 
 def output_sol(output_file, res):
-		res = zip(*res)
+		res = list(zip(*res))
 		for i in range(len(res)):
 				output_file.write(" ".join(res[i]) + "\n")
 
@@ -134,14 +134,14 @@ def main():
 				c += 1
 				if index + window_size <= len(genotypes):
 						curr_genotypes = genotypes[index: index + window_size]
-						curr_genotypes = zip(*curr_genotypes)
+						curr_genotypes = list(zip(*curr_genotypes))
 						curr_genotypes = ["".join(i) for i in curr_genotypes]
 						curr_res = start_EM(curr_genotypes)
 						output_sol(output_file, curr_res)
 						index += window_size
 				else:
 						curr_genotypes = genotypes[index:]
-						curr_genotypes = zip(*curr_genotypes)
+						curr_genotypes = list(zip(*curr_genotypes))
 						curr_genotypes = ["".join(i) for i in curr_genotypes]
 						curr_res = start_EM(curr_genotypes)
 						output_sol(output_file, curr_res)

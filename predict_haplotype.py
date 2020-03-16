@@ -52,7 +52,7 @@ def M_step(curr_haplotype, prob):
 		return prob
 
 def output_sol(output_file, res):
-		res = zip(*res)
+		res = list(zip(*res))
 		for i in range(len(res)):
 				output_file.write(" ".join(res[i]) + "\n")
 
@@ -80,7 +80,7 @@ def start_EM(genotypes):
 		EM_factor, changes = 0.0001, 10
 		time = 0
 		#while changes > EM_factor:
-		while time != 3:
+		while time != 11:
 				time += 1
 				haplotype_box = E_step(haplotype_box, pro_box)
 				pro_box = M_step(haplotype_box, pro_box)
@@ -125,7 +125,7 @@ def main():
 						genotypes[i][j] = max(candidate, key = lambda x : bagging[i][x])
 
 # -----------------------------------------EM Prediction-----------------------------------------------------
-		window_size = 10
+		window_size = 16
 		cc = len(genotypes) // window_size
 		c = 0
 		index = 0
@@ -134,14 +134,14 @@ def main():
 				c += 1
 				if index + window_size <= len(genotypes):
 						curr_genotypes = genotypes[index: index + window_size]
-						curr_genotypes = zip(*curr_genotypes)
+						curr_genotypes = list(zip(*curr_genotypes))
 						curr_genotypes = ["".join(i) for i in curr_genotypes]
 						curr_res = start_EM(curr_genotypes)
 						output_sol(output_file, curr_res)
 						index += window_size
 				else:
 						curr_genotypes = genotypes[index:]
-						curr_genotypes = zip(*curr_genotypes)
+						curr_genotypes = list(zip(*curr_genotypes))
 						curr_genotypes = ["".join(i) for i in curr_genotypes]
 						curr_res = start_EM(curr_genotypes)
 						output_sol(output_file, curr_res)
